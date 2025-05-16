@@ -1,0 +1,576 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+\PassOptionsToPackage{dvipsnames,svgnames,x11names}{xcolor}
+%
+\documentclass[
+]{report}
+
+\usepackage{amsmath,amssymb}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math}
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usepackage{lmodern}
+\ifPDFTeX\else  
+    % xetex/luatex font selection
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\setcounter{secnumdepth}{5}
+% Make \paragraph and \subparagraph free-standing
+\makeatletter
+\ifx\paragraph\undefined\else
+  \let\oldparagraph\paragraph
+  \renewcommand{\paragraph}{
+    \@ifstar
+      \xxxParagraphStar
+      \xxxParagraphNoStar
+  }
+  \newcommand{\xxxParagraphStar}[1]{\oldparagraph*{#1}\mbox{}}
+  \newcommand{\xxxParagraphNoStar}[1]{\oldparagraph{#1}\mbox{}}
+\fi
+\ifx\subparagraph\undefined\else
+  \let\oldsubparagraph\subparagraph
+  \renewcommand{\subparagraph}{
+    \@ifstar
+      \xxxSubParagraphStar
+      \xxxSubParagraphNoStar
+  }
+  \newcommand{\xxxSubParagraphStar}[1]{\oldsubparagraph*{#1}\mbox{}}
+  \newcommand{\xxxSubParagraphNoStar}[1]{\oldsubparagraph{#1}\mbox{}}
+\fi
+\makeatother
+
+
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}\usepackage{longtable,booktabs,array}
+\usepackage{calc} % for calculating minipage widths
+% Correct order of tables after \paragraph or \subparagraph
+\usepackage{etoolbox}
+\makeatletter
+\patchcmd\longtable{\par}{\if@noskipsec\mbox{}\fi\par}{}{}
+\makeatother
+% Allow footnotes in longtable head/foot
+\IfFileExists{footnotehyper.sty}{\usepackage{footnotehyper}}{\usepackage{footnote}}
+\makesavenoteenv{longtable}
+\usepackage{graphicx}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+% Set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+
+\usepackage[style=numeric]{biblatex}
+\addbibresource{Sources.bib}
+
+\usepackage{enumitem}
+
+
+\usepackage{geometry}
+\geometry{a4paper,top=35mm,bottom=30mm,textwidth=160mm}
+% \usepackage{chngcntr}
+
+\renewcommand{\thechapter}{\Roman{chapter}}
+
+\usepackage{tocloft}
+
+\usepackage{amsthm}
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[section]
+\newtheorem{example}{Example}[section]
+
+\renewcommand{\cftchapnumwidth}{2em}
+\renewcommand{\cftsecindent}{2em}
+\renewcommand{\cftsubsecindent}{5em}
+\setlength{\cftbeforechapskip}{1em} % Kapitel-Abstand im TOC
+\setlength{\cftbeforesecskip}{0.5em}
+\renewcommand{\thesection}{\arabic{section}}
+\renewcommand{\thesubsection}{\thesection.\arabic{subsection}}
+\renewcommand{\thesubsubsection}{\thesubsection.\arabic{subsubsection}}
+%\setcounter{chapter}{-1}
+\counterwithout{section}{chapter}
+
+\usepackage{tikz}
+\usetikzlibrary{bayesnet}
+\tikzset{
+      dot hidden/.style={},
+      line hidden/.style={},
+      dot colour/.style={dot hidden/.append style={color=#1}},
+      dot colour/.default=black,
+      line colour/.style={line hidden/.append style={color=#1}},
+      line colour/.default=black
+    }
+\NewDocumentCommand{\drawdie}{O{}m}{%
+      \begin{tikzpicture}[x=1em,y=1em,radius=0.1,#1]
+        \draw[rounded corners=0.5,line hidden] (0,0) rectangle (1,1);
+        \ifodd #2
+          \fill[dot hidden] (0.5,0.5) circle;
+        \fi
+        \ifnum #2>1
+          \fill[dot hidden] (0.2,0.2) circle;
+          \fill[dot hidden] (0.8,0.8) circle;
+        \fi
+        \ifnum #2>3
+          \fill[dot hidden] (0.2,0.8) circle;
+          \fill[dot hidden] (0.8,0.2) circle;
+        \fi
+        \ifnum #2>5
+          \fill[dot hidden] (0.8,0.5) circle;
+          \fill[dot hidden] (0.2,0.5) circle;
+        \fi
+      \end{tikzpicture}%
+    }
+
+
+\makeatletter
+\@ifpackageloaded{caption}{}{\usepackage{caption}}
+\AtBeginDocument{%
+\ifdefined\contentsname
+  \renewcommand*\contentsname{Table of contents}
+\else
+  \newcommand\contentsname{Table of contents}
+\fi
+\ifdefined\listfigurename
+  \renewcommand*\listfigurename{List of Figures}
+\else
+  \newcommand\listfigurename{List of Figures}
+\fi
+\ifdefined\listtablename
+  \renewcommand*\listtablename{List of Tables}
+\else
+  \newcommand\listtablename{List of Tables}
+\fi
+\ifdefined\figurename
+  \renewcommand*\figurename{Figure}
+\else
+  \newcommand\figurename{Figure}
+\fi
+\ifdefined\tablename
+  \renewcommand*\tablename{Table}
+\else
+  \newcommand\tablename{Table}
+\fi
+}
+\@ifpackageloaded{float}{}{\usepackage{float}}
+\floatstyle{ruled}
+\@ifundefined{c@chapter}{\newfloat{codelisting}{h}{lop}}{\newfloat{codelisting}{h}{lop}[chapter]}
+\floatname{codelisting}{Listing}
+\newcommand*\listoflistings{\listof{codelisting}{List of Listings}}
+\makeatother
+\makeatletter
+\makeatother
+\makeatletter
+\@ifpackageloaded{caption}{}{\usepackage{caption}}
+\@ifpackageloaded{subcaption}{}{\usepackage{subcaption}}
+\makeatother
+
+\ifLuaTeX
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
+\usepackage[]{biblatex}
+\addbibresource{Sources.bib}
+\usepackage{bookmark}
+
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same} % disable monospaced font for URLs
+\hypersetup{
+  colorlinks=true,
+  linkcolor={blue},
+  filecolor={Maroon},
+  citecolor={Blue},
+  urlcolor={Blue},
+  pdfcreator={LaTeX via pandoc}}
+
+
+\author{}
+\date{}
+
+\begin{document}
+
+
+\setcounter{page}{0}
+\renewcommand{\contentsname}{Contents}
+\tableofcontents
+\addtocontents{toc}{\protect\thispagestyle{empty}}
+
+\newpage
+
+\section{Introduction}
+
+The most common classification of probabilities distinguishes between
+objective, frequentist probability and subjective, Bayesian probability.
+As practical as this naive distinction has proven to be, it is
+worthwhile to take a closer look at the different facets of probability
+in order to better understand its role in statistics and across
+different schools of inference.
+
+The historical development of probability theory\footnote{There is, both
+  in English and German usage, some confusion about the terminology for
+  probability calculus, probability theory, and stochastics. I use
+  probability calculus when referring to the mathematical aspects, and
+  the more general term probability theory when addressing probability
+  from, for example, a philosophical perspective. I will avoid the term
+  stochastics altogether.} has been far from smooth. Compared with other
+mathematical and philosophical disciplines it seems as, for some reason,
+both mathematicians and philosophers had remarkable struggles to
+formalize and to deal with probability. In 1929 the British
+mathematician Bertrand Russell stated
+``\textit{Probability is the most important concept in modern science, expecially as nobody has the slightest notion what it means.}''
+\cite{sep-probability-interpret}.
+
+Though probability had practical and theoretical relevance for a long
+time, there is no calculus of probability before the seventeenth
+century. Until then, probability was handled qualitatively and mainly
+applied to propositions \cite{sep-probability-interpret}. The classical
+definition of probability wasn't introduced until the early 18th
+century\footnote{} by Jacob Bernoulli and Abraham De Moivre. At this
+stage, closely related to gamble settings, probability is seen as the
+fraction of the total number of possibilities in which a event of
+question occurs. In the following 200 years many attempts were made to
+extend the classical framework. In the early 19th century, attempts were
+made to develop a geometric foundation and with the invention of measure
+theory some mathematicians saw a strong connection to probability
+calculus. The mathematics of the 20th century was marked by a strong
+movement toward axiomatization, heavily influenced by David Hilbert and
+his 1921 proposal, now known as Hilbert's Program
+\cite{sep-hilbert-program}. In line with this movement 1933 Andrei
+Kolmogorov published
+\textit{Grundbegriffe der Wahrscheinlichkeitsrechnung} which set the
+foundation of modern probability calculus.
+
+\begin{quote}
+“The purpose of this monograph is to give an axiomatic foundation for the theory of probability. The author set himself the task of putting in their natural place, among the general notions of modern mathematics, the basic concepts of probability theory—concepts which until recently were considered to be quite peculiar.” \cite{a_n_kolmogorov_foundations_1950}
+\end{quote}
+
+Although his axiomatic approach aimed to be, as a mathematical theory,
+free from interpretation, he saw probability from a frequentistic
+perspective. In his chapter about elementary theory of probability,
+where he discussed probability in a finite setting, he added the section
+``The Relation to Experimental Data'' where he briefly described how the
+theory of probability is applied to the actual world of experiments:
+
+\begin{quote}
+\begin{enumerate}[label=\arabic*)]
+  \item "There is assumed a complex of conditions, $\mathfrak{G}$, which allows of any number of repetitions."
+  \item "We study a definite set of events which could take place as a result of the establishment of the conditions $\mathfrak{G}$. In individual cases where the conditions are realized, the events occur, generally, in different ways. Let $E$ be the set of all possible variants $\xi_1, \xi_2, ...$ of the outcome of the given events. Some of these variants might in general not occur, We include in the set $E$ all the variants which we regard \textit{a priori} as possible."
+  \item "If the variant of the events which has actually occurred upon realization of conditions $\mathfrak{G}$ belongs to the set $A$ (defined in any way), then we say that the event $A$ has taken place."
+\end{enumerate}
+\end{quote}
+
+A different perspective on probability was offered by the German
+mathematician and philosopher Rudolf Carnap:
+
+\begin{quote}
+"The various theories of probability are attempts at an explication of what is regarded as the prescientific concept of probability. In fact, however, there are two fundamentally different concepts for which the term 'probability' is in general use. The two concepts are as follows, here distinguished by subscripts.
+\begin{enumerate}[label=(\arabic*)]
+  \item $\text{Probability}_1$ is the degree of confirmation of a hypothesis $h$ with respect to an evidence statement $e$, e.g., an observational report. This is a logical, semantical concept. A sentence about this concept is based, not on observation of facts, but on logical analysis; if it is true, it is L-true (analytic).
+  \item $\text{Probability}_2$ is the relative frequency (in the long run) of one property of events or things with respect to another. A sentence about is concept is factual, empirical." \cite{carnap_logical_1950}
+\end{enumerate}
+\end{quote}
+
+\begin{center}
+\vspace{1cm}
+\begin{tikzpicture}[->, >=stealth, node distance= 1 cm, scale=0.8, transform shape]
+\useasboundingbox (-0.5, -2) rectangle (9.5, 4.5);
+
+    \node (1) at (1, 3.5) [draw,ellipse,minimum size=0pt,inner sep=2pt,scale=1, line width = 0.25mm] {\shortstack{Imprecise \\ Probability}};
+    
+    \node (2) at (3.5, 0.5) [draw,ellipse,minimum size=0pt,inner sep=3pt,scale=1, line width = 0.25mm] {\shortstack{Frequentism}};
+    
+    \node (3) at (4, -0.5) [draw,ellipse,minimum size=0pt,inner sep=2pt,scale=1, line width = 0.25mm] {\shortstack{Bayesianism}};
+    
+    \node (4) at (6.5, 2) [draw,ellipse,minimum size=0pt,inner sep=2pt,scale=1, line width = 0.25mm] {\shortstack{Generalized \\ Fiducial \\ Inference}};  
+    
+    \node (5) at (9.5, 0) [draw,ellipse,minimum size=0pt,inner sep=2pt,scale=1.1, line width = 0.3mm] {\shortstack{{Inferential} \\ {Models}}};
+    
+    \node (6) at (6, 4.5) [draw,ellipse,minimum size=0pt,inner sep=2pt,scale=1, line width = 0.25mm] {\shortstack{Random Set \\ Theory}};
+    
+    \node (7) at (3, 2) [draw,ellipse,minimum size=0pt,inner sep=3pt,scale=1, line width = 0.25mm] {\shortstack{Fiducial \\ Inference}};
+  
+    \node (8) at (5, -2) [draw,ellipse,minimum size=0pt,inner sep=2pt,scale=1, line width = 0.25mm] {\shortstack{Possibility \\ Theory}};
+    
+    \draw[->, line width = 0.3mm] (1) to[out = -140, in = 180, looseness=1.4] (8);
+    \draw[->, line width = 0.3mm] (1) to[out = 35, in = 171, looseness= 0.64] (6);
+    \draw[->, line width=0.3mm, dash pattern=on 3pt off 2pt] (2) to[out = 180, in = -180, looseness=1.8] (7);
+    \draw[->, line width=0.3mm, dash pattern=on 3pt off 2pt] (3) to[out = 180, in = -180, looseness=1.9] (7);   
+    \draw[->, line width = 0.3mm] (2) to[out = 0, in = 30, looseness=1.6] (8);
+    \draw[->, line width = 0.3mm] (3) to[out = 0, in = 30, looseness=1.6] (8);     
+    \draw[->, line width = 0.3mm] (7) to[out = 0, in = -180, looseness=1.7] (4);
+    \draw[->, line width = 0.3mm] (8) to[out = 0, in = -180, looseness=1.4] (5); 
+    \draw[->, line width = 0.3mm] (4) to[out = -55, in = -180, looseness=1.2] (5); 
+    \draw[->, line width = 0.3mm] (6) to[out = -8, in = 90, looseness=1.12] (5);
+    \draw[->, line width = 0.3mm] (4) to[out = 0, in = 90, looseness=1.2] (5);
+\end{tikzpicture}
+\vspace{0.5cm}
+\end{center}
+
+\section{Different types of probability}
+
+\subsection{Probability measure}
+
+\begin{definition}[Sigma-Algebra]
+Let $\Omega$ be a set and $\mathcal{P}(\Omega)$ denote the power set over $\Omega$. Then $\mathcal{F} \subseteq \mathcal{P}(\Omega)$ is called a $\sigma$-Algebra if 
+\begin{enumerate}
+  \item $\emptyset \in  \mathcal{F}$
+  \item $A \in \mathcal{F} \Rightarrow \overline{A} \in \mathcal{F}$
+  \item $(A_n)_{n \in \mathbb{N}} \subseteq \mathcal{F} \Rightarrow \displaystyle\bigcup_{n \in \mathbb{N}} A_n \in \mathcal{F}$
+\end{enumerate}
+holds. The tupel $(\Omega, \mathcal{F})$ is then called a {measurable space}.
+\end{definition}
+\begin{definition}[Measure]
+Let $(\Omega, \mathcal{F})$ be a measurable space. A set-function $\mu : \mathcal{F} \rightarrow \mathbb{R}$ is called a {measure} if it fulfils
+\begin{enumerate}
+  \item $\mu(\emptyset) = 0$ 
+  \item $\mu(A) \geq 0 \quad \forall \, A \in \mathcal{F}$ \quad (Non-negativity)
+  \item For any sequences of pairwise disjunct sets $A_i \in \mathcal{F}, \, i \geq 1$: \newline
+    $\mu \big(\bigcup_{i=1}^{\infty} A_i \big) = \sum_{i=1}^{\infty} \mu(A_i)$ \quad ($\sigma$-additivity)
+\end{enumerate}
+Measures that are normed to $\mu(\Omega) = 1$ (normalization property) are called \textit{probability measure} and will be noted with $\mathbb{P}$. The \textit{measure space} $(\Omega, \mathcal{F}, \mathbb{P})$ is then called a probability space where $\Omega$ is called a \textit{sample space} and $\mathcal{F}$ a \textit{event space}.
+\end{definition}
+
+\begin{definition}[Random variable]
+Let $(\Omega, \mathcal{F}, \mathbb{P})$ be a probability space and $(\Omega', \mathcal{F}')$ a measurable space. A function $X: \Omega \rightarrow \Omega'$ is a \textit{random variable} if 
+$$ \{\omega \, | \,  \omega \in \Omega \, \land \, X(w) \in A \} = X^{-1} (A) \in \mathcal{F} \quad \forall A \in \mathcal{F}' \quad (\mathcal{F}-\mathcal{F}'-\text{measurability})$$
+is satisfied. Using this definition the measurable space $(\Omega', \mathcal{F}')$ can be extended to a probability space through \mbox{$(\Omega, \mathcal{F}, \mathbb{P}) \xrightarrow{X} (\Omega', \mathcal{F}', \mathbb{P}_X)$} where the according \textit{push-forward-measure} $\mathbb{P}_X$ is defined through 
+$$\mathbb{P}_X (A) := \mathbb{P}(X \in A) \overset{}{=} \mathbb{P} (\{\omega | \omega \in \Omega \land X(\omega) \in A \}) \overset{\text{}}{=} \mathbb{P}( \underbrace{X^{-1} (A)}_{\in \mathcal{F}}) \in [0,1] \quad \forall A \in \mathcal{F}'.$$
+\end{definition}
+
+\begin{definition}[Information content]
+Let $(\Omega, \mathcal{F})$ be a measurable space. \textit{Information} can be characterized as a subset $\mathcal{A} \subseteq \mathcal{F}$ of events we are capable of evaluating as having occurred or not.
+
+
+Let $(\Omega, \mathcal{F}, \mathbb{P})$ be a probability space, $(\Omega', \mathcal{F}')$ a measurable space and $X$ an \textit{observable} $\mathcal{F}-\mathcal{F}'-\text{measurable}$ random variable. Then $\mathcal{A}_X = \{X^{-1}({A}) \mid {A} \in {\mathcal{F}'}\} \subseteq \mathcal{F}$ represents through $X$ \textit{observable} information.
+\end{definition}
+
+\begin{example}
+Consider a dice that is numbered and has coloured faces like this: $\Omega = \Big\{
+\raisebox{-3pt}{\drawdie[line hidden/.append style={fill=blue, opacity=0.47}]{1}},
+\raisebox{-3pt}{\drawdie[line hidden/.append style={fill=blue, opacity=0.47}]{2}},
+\raisebox{-3pt}{\drawdie[line hidden/.append style={fill=red, opacity=0.5}]{3}},
+\raisebox{-3pt}{\drawdie[line hidden/.append style={fill=green, opacity=0.6}]{4}},
+\raisebox{-3pt}{\drawdie[line hidden/.append style={fill=green, opacity=0.6}]{5}},
+\raisebox{-3pt}{\drawdie[line hidden/.append style={fill=green, opacity=1}]{6}}
+\Big\}$.
+
+If we are interested in the face values we can simply map the face values to the according numbers $X: \Omega \rightarrow \{1, 2, 3, 4, 5, 6\}$. For each realization of $X$ we can exactly know which events did occur or not. If we instead map to colours by $Y: \Omega \rightarrow \{blue, red, green\}$ some information is lost. If e.g. a green face was rolled, we can not know which of the green sides $\Big\{
+\raisebox{-3pt}{\drawdie[line hidden/.append style={fill=green, opacity=0.6}]{4}},
+\raisebox{-3pt}{\drawdie[line hidden/.append style={fill=green, opacity=0.6}]{5}},
+\raisebox{-3pt}{\drawdie[line hidden/.append style={fill=green, opacity=1}]{6}}
+\Big\}$ was rolled.
+
+-   $X: \Omega \rightarrow \{1, 2, 3, 4, 5, 6\}$ \newline
+    $\mathcal{A}_X \subseteq \mathcal{A}$  \newline
+
+-   $Y: \Omega \rightarrow \{blue, red, green\}$ \newline
+    $\mathcal{A}_Y \subset \mathcal{A}$ 
+\end{example}
+
+\section{False confidence and validity critereon}
+
+\section{Imprecise probability theory}
+
+The term \textit{imprecise probability} does not refer to a particular
+theory, but rather to a collection of different approaches that share a
+common feature of imprecision. In contrast to probability measures,
+imprecise probabilities are not additive. Some approaches are can be
+seen as a extension of the measure theoretic based probability theory,
+like \textit{random sets}, while others might have a
+non-measure-theoretic foundation. In this chapter I will give deliver
+some motivation for imprecise probabilities in general and introduce
+some popular concepts of imprecise probabilities.
+
+Consider a variation of the prison dilemma used in game theory, but from
+our perspective as a policeman. Assume there a two suspects of a crime,
+person \(A\) and \(B\), where it is known, that exactly one of them must
+be guilty. If \(A\) is guilty \(B\) can not be guilty and otherwise. We,
+as a policeman, interrogate \(A\) without knowing anything about person
+\(B\). After the interrogation a college asks about our opinion, how
+probable it is, that person \(A\) is guilty.
+
+\begin{quote}
+College: \textit{What do you think is the probability that person A is guilty?} \par
+Policeman: \textit{I think the probability is around 20\%.} \par
+College: \textit{I see. So you assume the probability that person B is guilty must be around 80\%?}
+\end{quote}
+
+Although being intuitively clear how our college came to this
+conclusion, his response might seem puzzling. Our college implicitly
+chose
+\(\Omega = \{\mathbf{A} \text{ is guilty}, \mathbf{B} \text{ is guilty} \}\)
+as sample space and
+\(\mathcal{F} = \{ \emptyset, \{ \mathbf{A} \text{ is guilty} \}, \{ \mathbf{B} \text{ is guilty} \}, \{ \mathbf{A} \text{ is guilty}, \mathbf{B} \text{ is guilty} \} \}\)
+as event space. Simple probability calculus shows that
+\(P(\{A \text{ is guilty}\}) \, = \, 0.2\) implies
+\(P(\{B \text{ is guilty}\}) \, = \,  0.8\).
+
+\begin{align*}
+1 \ &= \ P(\Omega) & \text{(normalization)}\\
+  &= \ P(\{\mathbf{A} \text{ is guilty}, \, \mathbf{B} \text{ is guilty}\}) \\
+  &= \ P(\{\mathbf{A} \text{ is guilty}\} \, \dot\cup \, \{\mathbf{B} \text{ is guilty}\}) & \text{}\\
+  &= \ P(\{\mathbf{A} \text{ is guilty}\}) + P(\{\mathbf{B} \text{ is guilty}\}) & \text{(additivity)}\\
+  & \Leftrightarrow \\
+P(\{\mathbf{B} \text{ is guilty}\}) \ &= \ 1 - P(\{\mathbf{A} \text{ is guilty}\})
+\end{align*}
+
+Depending on the way someone interprets the statement ``I think the
+probability is around 20\%'', this result might be more or less
+troubling. It is thinkable that a very experienced policeman had
+encountered many sufficiently similar situations to determine a relative
+frequency based solely on the information he gathered from interrogating
+\(A\), without any knowledge of \$B. Based on such a reading, the above
+conclusion seems quite reasonable - even though such a perspective might
+be rather uncommon in this context. Rather, one would interpret such an
+educated guess as a quantification of the strength of belief. Such an
+educated guess would more likely be meant as a quantification of the
+strength of belief.
+
+\subsection{Random sets}
+
+\(\Omega = \Big\{
+\raisebox{-3pt}{\drawdie[line hidden/.append style={fill=blue, opacity=0.47}]{1}},
+\raisebox{-3pt}{\drawdie[line hidden/.append style={fill=blue, opacity=0.47}]{2}},
+\raisebox{-3pt}{\drawdie[line hidden/.append style={fill=red, opacity=0.5}]{3}},
+\raisebox{-3pt}{\drawdie[line hidden/.append style={fill=green, opacity=0.6}]{4}},
+\raisebox{-3pt}{\drawdie[line hidden/.append style={fill=green, opacity=0.6}]{5}},
+\raisebox{-3pt}{\drawdie[line hidden/.append style={fill=green, opacity=1}]{6}}
+\Big\} \ \rightarrow \ \Omega_{Obs} = \Big\{
+\raisebox{-3pt}{\drawdie[line hidden/.append style={fill=blue, opacity=0.47}]{1}},
+\raisebox{-3pt}{\drawdie[line hidden/.append style={fill=blue, opacity=0.47}]{2}},
+\raisebox{-3pt}{\drawdie[line hidden/.append style={fill=gray, opacity=0.55}]{3}},
+\raisebox{-3pt}{\drawdie[line hidden/.append style={fill=gray, opacity=0.55}]{4}},
+\raisebox{-3pt}{\drawdie[line hidden/.append style={fill=gray, opacity=0.55}]{5}},
+\raisebox{-3pt}{\drawdie[line hidden/.append style={fill=gray, opacity=0.85}]{6}}
+\Big\}\)
+
+\begin{definition}[Random set]
+Let $(\Omega, \mathcal{F}, \mathbb{P})$ be a probability space and $(\Omega', \mathcal{F}')$ a measurable space. A multi-valued mapping $\Gamma: \Omega \rightarrow \mathcal{P}(\Omega')$. For $A \in \mathcal{F}'$ the \textit{upper inverse} is given by $\Gamma^*(A) = \{\omega \, | \, \omega \in \Omega, \, \Gamma(\omega) \cap A \neq \emptyset \}$ and the \textit{lower inverse} is $\Gamma_*(A) = \{\omega \, | \, \in \Omega, \, \emptyset \neq \Gamma(\omega) \subseteq A \}$. When $\Gamma^*(A)$ and $\Gamma_*(A)$ belongs to $\mathcal{F}$ for all $A \in \mathcal{F}'$ the multi-valued mapping $\Gamma$ is said to be strongly measurable and then called a \textit{random set}.
+\end{definition}
+
+\begin{definition}[lower and upper probability]
+Let $\Gamma: \Omega \rightarrow \mathcal{P}(\Omega')$ be a random set. For $A \in \mathcal{F}'$ the \textit{upper probability} is defined by $P^*_\Gamma (A) = \displaystyle\frac{\mathbb{P}(\Gamma^*(A))}{\mathbb{P}(\Gamma^*(\Omega))}$ and the \textit{lower probability} by $P_{*\Gamma} (A) = \frac{\mathbb{P}(\Gamma_*(A))}{\mathbb{P}(\Gamma^*(\Omega))}$.
+\end{definition}
+
+``\textit{Don't know}'' probability \(Pl(A) - Bel(A)\)
+
+\subsection{Possibility measures}
+
+Possibility contour \(\pi: \mathcal{X} \rightarrow [0, \, 1]\) with
+\(\sup\)
+
+\section{Fiducialism}
+\subsection{Fisher's original fiducial argument}
+
+In 1930 Fisher introduced his idea the \textit{fiducial principle} which
+turned out to be one of his most controversial ideas of his career. He
+criticised the concept of \textit{inverse probability}, by which he
+meant Bayes's postulate fundamental to Bayesian inference
+\cite{aldrich_r_1997}.
+
+\begin{quote}
+"Inverse probability has, I believe, survived so long in spite of its unsatisfactory basis, because its critics have until recent times put forward nothing to replace it as a rational theory of learning by experience." \cite{Fisher_1930}
+\end{quote}
+
+He disregarded the subjective nature behind the Bayesian approach and
+often inherently arbitrary choice of a particular \textit{a priori}
+distribution for parameters. Therefore he tried to find a more objective
+alternative that is closer to frequentist probabilities. Although being
+convinced of the importance of his idea he failed to establish
+fiducialism. Fisher could not provide a coherent and comprehensive
+theory for fiducial inference and left behind a strongly limited theory,
+mostly built around exemplary examples and several changes of mind that
+lead to some confusion \cite{zabell_r_nodate}.
+
+His proposed example takes a bivariate normal distribution with unknown,
+fixed correlation \(\phi\) with a sample size of \(n=4\).
+
+Let \(T\) be a statistic derived for observable sample correlations
+\(r\) with distribution function
+\(F(r; \phi) \, = \, P(T \leq r \, | \, \Phi = \phi)\).
+
+Fisher reasoned that, under repeated sampling, each possible value of
+\(\phi \in [-1,\,1]\) would be associated with a unique value of the
+\(\gamma-\)quantile of the sampling distribution.
+
+Therefore by looking up the related e.g.~0.95-quantile to an observed
+sample correlation there is a corresponding \textit{fiducial}
+0.05-value.
+
+Therefore by looking up the related e.g.~0.95-quantile to an observed
+sample correlation there is a corresponding \textit{fiducial}
+0.05-value. Fisher stated this as a relation of the form
+\(P = F(T, \theta)\), where \(T\) is a statistic of continuous
+variation, \(P\) the probability, that \(T\) is less than any specified
+value and \(\theta\) the fixed parameter of question. Therefore by
+looking up the fiducial 0.05-value for an observed \(\theta\) we know
+
+\subsection{Generalized Fiducial Inference}
+
+\begin{definition}[Data generating equation]
+A data generating equation (DGE) has the form $\mathbb{X} \ = \  G \, (\theta, \, U)$ and contains
+\begin{itemize}
+  \item observable data $\mathbb{X}$
+  \item an association function $G$
+  \item a random variable $U$ with known distribution
+  \item a parameter of interest $\theta$.
+\end{itemize}
+After the observation this results in $X \ = \ G \, (\theta, \, U^*)$ with
+\begin{itemize}
+  \item observed data $X$
+  \item an unobserved realization $U^*$.
+\end{itemize}
+\end{definition}
+
+This can be reformulated through
+\(X \ = \ G \, (\theta, \, U^*) \ \, \Leftrightarrow \ \, \theta \ = \ G^{-1}(X, \, U^*)\).
+
+The basic idea behind DGEs can be shown with a motivational example.
+
+\begin{example}
+Lets have a look at a simple normal distribution $Y \sim \mathcal{N}(\theta,\, \sigma^2)$. We are interested in the unknown parameter $\theta$. Now we can ask the question, which information would be sufficient to know the exact value of $\theta$ after observing e.g. X = (1.159) from $\mathcal{N}(2, 1.5^2)$
+$$Y \sim \mathcal{N}(\theta,\, \sigma^2) = \theta + \mathcal{N}(0,\, \sigma^2), \quad U \sim \mathcal{N}(0,\, \sigma^2) \newline
+\Rightarrow \ \theta \ = \ G^{-1}(X, \, U^*) \ = \ X - U^*$$
+If the exact value of $U^* = -0.841$ was known, the true value of $\theta$ could directly be calculated by
+$$\theta = X- U^* = 1.159 - (-0.841) = 2$$
+\end{example}
+
+So can we simply observe \(X\) and solve for
+\(\theta \ = \ G^{-1}(X, U^*)\)? The required information about \(U^*\)
+is typically not available and therefore the direct approach is not
+feasible.
+
+
+\printbibliography
+
+
+
+\end{document}

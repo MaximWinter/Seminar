@@ -1,0 +1,46 @@
+---
+output: 
+  pdf_document:
+    latex_engine: pdflatex
+header-includes:
+  - \usepackage{graphicx}  % Für resizebox
+  - \usepackage{multicol}  % Für die mehrspaltige Darstellung
+  - \usepackage{geometry}
+  - \geometry{a4paper, top=0.5 cm, bottom=0.5 cm, left=0.5 cm, right=0.5 cm}
+  - \usepackage{enumitem}
+  - \usepackage{fancybox} % Für fbox
+  - \usepackage[none]{hyphenat}
+  - \usepackage{amsmath}
+  - \usepackage{tikz}
+  - \usetikzlibrary{bayesnet}
+  - \usepackage{graphicx}  % For \resizebox
+  - \usepackage{amsthm}
+  - \newtheorem{definition}{Definition}[section]
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+\section{Introduction}
+
+\section{Different types of probability}
+
+\subsection{Probability measure}
+
+\begin{definition}[Sigma-Algebra]
+Let $\Omega$ be a set and $\mathcal{P}(\Omega)$ denote the power set over $\Omega$. Then $\mathcal{F} \subseteq \mathcal{P}(\Omega)$ is called a $\sigma$-Algebra if it fullfills: 
+\begin{enumerate}
+  \item $\emptyset \in  \mathcal{F}$
+  \item $A \in \mathcal{F} \Rightarrow \overline{A} \in \mathcal{F}$
+  \item $(A_n)_{n \in \mathbb{N}} \subseteq \mathcal{F} \Rightarrow \cup_{n \in \mathbb{N}} A_n \in \mathcal{F}$
+\end{enumerate}
+\end{definition}
+
+\section{False confidence and validity critereon}
+
+\section{Imprecise probability theory}
+
+\subsection{Random sets}
+
+\subsection{Possibility measures}
