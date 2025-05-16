@@ -518,6 +518,14 @@ relation between \(N\) and \(\Pi\) is given through
 \(N (p \land q) \, = \, \min \big( N(p), N(q) \big)\) and
 \(\Pi (p \lor q) \, = \, \max \big( \Pi(p), \Pi(q) \big)\).
 
+\begin{example}[Prisoners dilemma II]
+This framework enables us to model the initial situation in two particular cases. In the case where no suspect has yet been interrogated and nothing is known about either suspect (complete ignorance), and in the case where, after the interrogation of one (or possibly both) suspects, the guilt or innocence of a suspect is certain (complete knowledge).
+
+The first case reveals a notable difference from the Bayesian flat prior method. Instead of assuming a prior guilt (or innocence) of 0.5 for each suspect under ignorance, we can now adopt a more sophisticated perspective. The belief base contains our information that exactly one of the two suspects is guilty. $N(A \text{ is guilty} \, \lor \, B \text{ is guilty}) = 1$. On the other hand there is no reason to believe in the guilt of $A$ or $B$ separately $N(A \text{ is guilty}) = N(B \text{ is guilty}) = 0$. On the other hand there is no reason to doubt that one of the subjects is innocent $\Pi(A \text{ is guilty} \, \lor \, B \textit{ is guilty}) = \Pi (A \text{ is guilty}) = \Pi (B \text{ is guilty}) = 1$. 
+
+In the second case e.g. for $N(A \text{ is guilty}) = 1$ it directly follows through $\Pi(A) \text{ is not guilty}) = 1 -  N(A \text{ is guilty}) = 0$ and $A \text{ is guilty} \Leftrightarrow B \text{ is not guilty}$ that $B$ must be believed to be innocent.
+\end{example}
+
 Possibility contour \(\pi: \mathcal{X} \rightarrow [0, \, 1]\) with
 \(\sup_x \pi (x) = 1\) Possibility measure
 \(\Pi: \mathcal{P}(\mathcal{X}) \rightarrow [0, \, 1], \ A \mapsto \sup \pi (x), A \subseteq \mathcal{X}\)
