@@ -166,6 +166,7 @@ If we are interested in the face values we can simply map the face values to the
 
 The term \textit{imprecise probability} does not refer to a particular theory, but rather to a collection of different approaches that share a common feature of imprecision. In contrast to probability measures, imprecise probabilities are not additive. Some approaches are can be seen as a extension of the measure theoretic based probability theory, like \textit{random sets}, while others might have a non-measure-theoretic foundation. In this chapter I will give deliver some motivation for imprecise probabilities in general and introduce some popular concepts of imprecise probabilities.
 
+
 Consider a variation of the prison dilemma used in game theory, but from our perspective as a policeman. Assume there a two suspects of a crime, person $A$ and $B$, where it is known, that exactly one of them must be guilty. If $A$ is guilty $B$ can not be guilty and otherwise. We, as a policeman, interrogate $A$ without knowing anything about person $B$. After the interrogation a college asks about our opinion, how probable it is, that person $A$ is guilty.
 
 \begin{quote}
@@ -224,14 +225,29 @@ Let $\Gamma: \Omega \rightarrow \mathcal{P}(\Omega')$ be a random set. For $A \i
 
 
 \subsubsection{Boolean possibility theory}
-Boolean possibility theory is based on propositional logic. The Pinciple of Bivalence states that every proposition is either true (1) or false (0). The current knowledge of an agent is represented by a \textit{belief base} $K$. If a proposition $p$ follows from $K$
+Boolean possibility theory is based on propositional logic where the Pinciple of Bivalence states that every proposition $p$ is either true (1) or false (0). But instead of focusing directly on propositions the focus lies in modelling a rational agents belief about propositions. The current knowledge of an agent is represented by a \textit{belief base} $K$ which contains boolean formulas. $K$ is required to be \textit{consistent} i.e. it must be free of logical contradictions. 
 
+If a proposition $p$, based on $K$, is logically true, the agent must believe $p$ to be true, written as $N(p) \, = \, 1$ and $N(p) \, = \, 0$ otherwise.
 
-
-Let $N(p) \in \{0, \, 1 \}$ denote the (Boolean) degree of  belief of $p$ (based on $K$). An agents state of belief is then represented by the pair $(N(p), \, N(\lnot p))$.
+An agents state of belief is then represented by the pair $(N(p), \, N(\lnot p))$ with 3 possible states:
 
 \begin{itemize}
-  \item $(N(p), \, N(\lnot p)) \$
+  \item $(N(p), \, N(\lnot p)) = (1, \, 0)$ agent believes $p$
+  \item $(N(p), \, N(\lnot p)) = (0, \, 1)$ agent believes $\lnot p$
+  \item $(N(p), \, N(\lnot p)) = (0, \, 0)$ agent is completely ignorant about $p$
+\end{itemize}
+
+
+
+$(N(p), \, N(\lnot p)) = (1, \, 1)$ is not a possible state since $p \, \land \, \lnot p$ is a contradiction and can not be derived by a consistent belief base. It is important to notice that $N(p) \, = \, 0$ does not imply $N( \lnot p) \, = \, 1$ since an agent is allowed to be fully ignorant. Therefore the question arises if a certain proposition is consistent with $K$. If $p$ is consistent with $K$ this relation is stated by $\Pi (p) \, = \, 1$. The relation between $N$ and $\Pi$ is given through $\Pi (p) \, = \, 1 - N(\lnot p)$ and furthermore $N (p \land q) \, = \, \min \big( N(p), N(q) \big)$ and $\Pi (p \lor q) \, = \, \max \big( \Pi(p), \Pi(q) \big)$.
+
+\begin{example}[Prisoners dilemma II]
+This framework enables us to model the initial situation in two particular cases. In the case where no suspect has yet been interrogated and nothing is known about either suspect (complete ignorance), and in the case where, after the interrogation of one (or possibly both) suspects, the guilt or innocence of a suspect is certain (complete knowledge).
+
+The first case reveals a notable difference from the Bayesian flat prior method. Instead of assuming a prior guilt (or innocence) of 0.5 for each suspect under ignorance, we can now adopt a more sophisticated perspective. The belief base contains our information that exactly one of the two suspects is guilty. $N(A \text{ is guilty} \, \lor \, B \text{ is guilty}) = 1$. On the other hand there is no reason to believe in the guilt of $A$ or $B$ separately $N(A \text{ is guilty}) = N(B \text{ is guilty}) = 0$. On the other hand there is no reason to doubt that one of the subjects is innocent $\Pi(A \text{ is guilty} \, \lor \, B \textit{ is guilty}) = \Pi (A \text{ is guilty}) = \Pi (B \text{ is guilty}) = 1$. 
+
+In the second case e.g. for $N(A \text{ is guilty}) = 1$ it directly follows through $\Pi(A) \text{ is not guilty}) = 1 -  N(A \text{ is guilty}) = 0$ and $A \text{ is guilty} \Rightleftarrow B \text{ is not guilty}$ that $B$ must be believed to be innocent.
+\end{example}
 
 Possibility contour $\pi: \mathcal{X} \rightarrow [0, \, 1]$ with $\sup_x \pi (x) = 1$
 Possibility measure $\Pi: \mathcal{P}(\mathcal{X}) \rightarrow [0, \, 1], \ A \mapsto \sup \pi (x), A \subseteq \mathcal{X}$

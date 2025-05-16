@@ -78,17 +78,15 @@
 \makesavenoteenv{longtable}
 \usepackage{graphicx}
 \makeatletter
-\newsavebox\pandoc@box
-\newcommand*\pandocbounded[1]{% scales image to fit in text height/width
-  \sbox\pandoc@box{#1}%
-  \Gscale@div\@tempa{\textheight}{\dimexpr\ht\pandoc@box+\dp\pandoc@box\relax}%
-  \Gscale@div\@tempb{\linewidth}{\wd\pandoc@box}%
-  \ifdim\@tempb\p@<\@tempa\p@\let\@tempa\@tempb\fi% select the smaller of both
-  \ifdim\@tempa\p@<\p@\scalebox{\@tempa}{\usebox\pandoc@box}%
-  \else\usebox{\pandoc@box}%
-  \fi%
-}
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
 % Set default figure placement to htbp
+\makeatletter
 \def\fps@figure{htbp}
 \makeatother
 
@@ -196,6 +194,9 @@
 \@ifpackageloaded{subcaption}{}{\usepackage{subcaption}}
 \makeatother
 
+\ifLuaTeX
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
 \usepackage[]{biblatex}
 \addbibresource{Sources.bib}
 \usepackage{bookmark}
@@ -217,7 +218,6 @@
 \begin{document}
 
 
-\setcounter{page}{0}
 \renewcommand{\contentsname}{Contents}
 \tableofcontents
 \addtocontents{toc}{\protect\thispagestyle{empty}}
@@ -482,6 +482,41 @@ Let $\Gamma: \Omega \rightarrow \mathcal{P}(\Omega')$ be a random set. For $A \i
 ``\textit{Don't know}'' probability \(Pl(A) - Bel(A)\)
 
 \subsection{Possibility measures}
+
+\subsubsection{Boolean possibility theory}
+
+Boolean possibility theory is based on propositional logic where the
+Pinciple of Bivalence states that every proposition \(p\) is either true
+(1) or false (0). But instead of focusing directly on propositions the
+focus lies in modelling a rational agents belief about propositions. The
+current knowledge of an agent is represented by a \textit{belief base}
+\(K\) which contains boolean formulas. \(K\) is required to be
+\textit{consistent} i.e.~it must be free of logical contradictions.
+
+If a proposition \(p\), based on \(K\), is logically true, the agent
+must believe \(p\) to be true, written as \(N(p) \, = \, 1\) and
+\(N(p) \, = \, 0\) otherwise.
+
+An agents state of belief is then represented by the pair
+\((N(p), \, N(\lnot p))\) with 3 possible states:
+
+\begin{itemize}
+  \item $(N(p), \, N(\lnot p)) = (1, \, 0)$ agent believes $p$
+  \item $(N(p), \, N(\lnot p)) = (0, \, 1)$ agent believes $\lnot p$
+  \item $(N(p), \, N(\lnot p)) = (0, \, 0)$ agent is completely ignorant about $p$
+\end{itemize}
+
+\((N(p), \, N(\lnot p)) = (1, \, 1)\) is not a possible state since
+\(p \, \land \, \lnot p\) is a contradiction and can not be derived by a
+consistent belief base. It is important to notice that
+\(N(p) \, = \, 0\) does not imply \(N( \lnot p) \, = \, 1\) since an
+agent is allowed to be fully ignorant. Therefore the question arises if
+a certain proposition is consistent with \(K\). If \(p\) is consistent
+with \(K\) this relation is stated by \(\Pi (p) \, = \, 1\). The
+relation between \(N\) and \(\Pi\) is given through
+\(\Pi (p) \, = \, 1 - N(\lnot p)\) and furthermore
+\(N (p \land q) \, = \, \min \big( N(p), N(q) \big)\) and
+\(\Pi (p \lor q) \, = \, \max \big( \Pi(p), \Pi(q) \big)\).
 
 Possibility contour \(\pi: \mathcal{X} \rightarrow [0, \, 1]\) with
 \(\sup_x \pi (x) = 1\) Possibility measure
