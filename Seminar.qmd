@@ -19,7 +19,6 @@ format:
        - file: null.tex
 ---
 
-\setcounter{page}{0}
 \renewcommand{\contentsname}{Contents}
 \tableofcontents
 \addtocontents{toc}{\protect\thispagestyle{empty}}
@@ -221,6 +220,18 @@ Let $\Gamma: \Omega \rightarrow \mathcal{P}(\Omega')$ be a random set. For $A \i
 "\textit{Don't know}" probability $Pl(A) - Bel(A)$
 
 \subsection{Possibility measures}
+
+
+
+\subsubsection{Boolean possibility theory}
+Boolean possibility theory is based on propositional logic. The Pinciple of Bivalence states that every proposition is either true (1) or false (0). The current knowledge of an agent is represented by a \textit{belief base} $K$. If a proposition $p$ follows from $K$
+
+
+
+Let $N(p) \in \{0, \, 1 \}$ denote the (Boolean) degree of  belief of $p$ (based on $K$). An agents state of belief is then represented by the pair $(N(p), \, N(\lnot p))$.
+
+\begin{itemize}
+  \item $(N(p), \, N(\lnot p)) \$
 
 Possibility contour $\pi: \mathcal{X} \rightarrow [0, \, 1]$ with $\sup_x \pi (x) = 1$
 Possibility measure $\Pi: \mathcal{P}(\mathcal{X}) \rightarrow [0, \, 1], \ A \mapsto \sup \pi (x), A \subseteq \mathcal{X}$
