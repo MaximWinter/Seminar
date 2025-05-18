@@ -94,6 +94,7 @@
 \addbibresource{Sources.bib}
 
 \usepackage{enumitem}
+\usepackage{mathrsfs}
 
 
 \usepackage{geometry}
@@ -545,7 +546,7 @@ denote the set that contains the resulting categories \(\omega\) and
 \([p] \subseteq \Omega\) describe the conditions where \(p\) is true. We
 then refer to the conditions \([p]\) as the models of \(p\). A
 proposition \(p\) is believed to be true if \([K] \subseteq [p]\) and
-believed to be false if \([K] \subseteq [p^C]\). If a proposition allows
+believed to be false if \([K] \subseteq [p]^C\). If a proposition allows
 for at least one setting where it could be true it is considered to be
 \textit{possible}. If a proposition is true in every setting it is
 \textit{necessary} to believe in it.
@@ -636,6 +637,19 @@ So can we simply observe \(X\) and solve for
 \(\theta \ = \ G^{-1}(X, U^*)\)? The required information about \(U^*\)
 is typically not available and therefore the direct approach is not
 feasible.
+
+\section{Inferential models}
+
+Ryan Martin defines defines inferential models as follows:
+
+\begin{definition}[Inferential models, as given by \cite{martin_false_2019}]
+An inferential model is a map from $(\mathscr{P}, y, \dots)$ to a function 
+$b_y : 2^{\Theta} \to [0,1]$, where $b_y(A)$ represents the analyst's belief 
+in the assertion "$\theta \in A$".
+\end{definition}
+
+This definition seems to have been purposefully left vague and requires
+further explanation.
 
 
 \printbibliography
