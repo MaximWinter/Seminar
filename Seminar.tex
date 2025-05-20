@@ -804,7 +804,9 @@ of \(U\), denoted as \(u^* \sim P_U\), can be be repeatedly drawn. The
 new relation \(X = G(\theta^*, u^*)\) contains observed (therefore
 known) data, simulated (therefore known) sample of \(u*\) and a known
 relation \(G\). Therefore \(\theta^*\) can be derived as a
-\textit{random estimator} (or \textit{fiducial sample}).
+\textit{random estimator} (or \textit{fiducial sample}) with an
+according fiducial distribution.
+\[\theta^*_{FD} \ = \ \text{argmin}_{\theta^*} \| \hspace{-0.3cm} \underbrace{X}_{\displaystyle{G(\theta, \, U^*)}} \! - \ G(\theta, u^*) \| \]
 
 \section{Inferential models}
 
@@ -824,18 +826,32 @@ further explanation.
 In the early stage of Inferential models the authors focused on IM
 construction based on random sets suggested by the following procedure:
 
-\textbackslash begin\{quote\} ``\textit{A-step. } Associate the unknown
-parameter \(\theta\) to each possible \((x, u)\) pair to obtain a
-collection of sets \(\Theta_x(u)\) of candidate parameter values.
-\newline \textit{P-step. } Predict \(\mu*\) with a valid predictive
-random set \(\mathcal{S}\). \newline \textit{C-step. } Combine
-\(X = x, \, \Theta_x (u)\), and \(\mathcal{S}\) to obtain a random set
-\(\Theta_x (\mathcal{S}) = \bigcup_{u \in {\mathcal{S}}} \Theta_x(u)\).
-Then, for any assertion \(A \subseteq \Theta\), compute the probability
-that the random set \(\Theta_x (\mathcal{S})\) is a subset of A as a
-measure of the available evidence in supporting \(A\)''
-\textbackslash cite{[}martin\_inferential\_2013{]}.
-\textbackslash end\{quote\}
+\begin{quote}
+"\textit{A-step. } Associate the unknown parameter $\theta$ to each possible $(x, u)$ pair to obtain a collection of sets $\Theta_x(u)$ of candidate parameter values. \newline
+\textit{P-step. } Predict $\mu*$ with a valid predictive random set $\mathcal{S}$. \newline
+\textit{C-step. } Combine $X = x, \, \Theta_x (u)$, and $\mathcal{S}$ to obtain a random set $\Theta_x (\mathcal{S}) = \bigcup_{u \in {\mathcal{S}}} \Theta_x(u)$. Then, for any assertion $A \subseteq \Theta$, compute the probability that the random set $\Theta_x (\mathcal{S})$ is a subset of $A$ as a measure of the available evidence in supporting $A$"\cite{martin_inferential_2013}.
+\end{quote}
+
+The \textit{a(ssociation)-step} is basically the same as the stating a
+data generating equation. The \textit{p(rediction)-step} is
+conceptionally the same as the simulating samples from a copy of the
+unobserved auxiliary random variable but with the major difference, that
+an extra layer of impression is added by the usage of a random set. In
+contrast to the GFI method, not simply just a single single random
+estimate and a single fiducial distribution are derived, but instead a
+set of random estimates and fiducial distributions. While GFI relies on
+a arbitrary choice of one single auxiliary variable \(U\), which might
+be or not be close to the true (or optimal) \(U_0\), a good choice of of
+the random set \(\Gamma\) makes it more probable that \(U_0\) is
+captured in \(S(\Gamma)\) which then makes it more probable, that the
+true (or optimal) value for \(\theta\) is also captured. In particular,
+from \(U_0 \in S(\Gamma)\), it follows that
+\(\theta_0 \in \{ \theta \mid X = G(U, \theta) \} := \Theta_x(U)\) and
+otherwise. The idea behind the \textit{c(ombination)-step} is pretty
+simple. It suggests to construct, based on the results from the p-step,
+a new random set. Based on this random set the lower probability can be
+calculated to evaluate as an non-additive degrees of belief about any
+assertion of the form \(A \subseteq \Theta\).
 
 
 \printbibliography
