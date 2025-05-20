@@ -234,17 +234,13 @@ worthwhile to take a closer look at the different facets of probability
 in order to better understand its role in statistics and across
 different schools of inference.
 
-The historical development of probability theory\footnote{There is, both
-  in English and German usage, some confusion about the terminology for
-  probability calculus, probability theory, and stochastics. I use
-  probability calculus when referring to the mathematical aspects, and
-  the more general term probability theory when addressing probability
-  from, for example, a philosophical perspective. I will avoid the term
-  stochastics altogether.} has been far from smooth. Compared with other
-mathematical and philosophical disciplines it seems as, for some reason,
-both mathematicians and philosophers had remarkable struggles to
-formalize and to deal with probability. In 1929 the British
-mathematician Bertrand Russell stated
+The historical development of probability
+theory\footnote{The following historical summary is primarily based on \cite{shafer_origins_2018}.}
+has been far from smooth. Compared with other mathematical and
+philosophical disciplines it seems as, for some reason, both
+mathematicians and philosophers had remarkable struggles to formalize
+and to deal with probability. In 1929 the British mathematician Bertrand
+Russell stated
 ``\textit{Probability is the most important concept in modern science, expecially as nobody has the slightest notion what it means.}''
 \cite{sep-probability-interpret}.
 
@@ -252,24 +248,23 @@ Though probability had practical and theoretical relevance for a long
 time, there is no calculus of probability before the seventeenth
 century. Until then, probability was handled qualitatively and mainly
 applied to propositions \cite{sep-probability-interpret}. The classical
-definition of probability wasn't introduced until the early 18th
-century\footnote{} by Jacob Bernoulli and Abraham De Moivre. At this
-stage, closely related to gamble settings, probability is seen as the
-fraction of the total number of possibilities in which a event of
-question occurs. In the following 200 years many attempts were made to
-extend the classical framework. In the early 19th century, attempts were
-made to develop a geometric foundation and with the invention of measure
-theory some mathematicians saw a strong connection to probability
-calculus. The mathematics of the 20th century was marked by a strong
-movement toward axiomatization, heavily influenced by David Hilbert and
-his 1921 proposal, now known as Hilbert's Program
-\cite{sep-hilbert-program}. In line with this movement 1933 Andrei
-Kolmogorov published
+definition of probability wasn't introduced until the early 18th century
+by Jacob Bernoulli and Abraham De Moivre. At this stage, closely related
+to gamble settings, probability is seen as the fraction of the total
+number of possibilities in which a event of question occurs. In the
+following 200 years many attempts were made to extend the classical
+framework. In the early 19th century, attempts were made to develop a
+geometric foundation and with the invention of measure theory some
+mathematicians saw a strong connection to probability calculus. The
+mathematics of the 20th century was marked by a strong movement toward
+axiomatization, heavily influenced by David Hilbert and his 1921
+proposal, now known as Hilbert's Program \cite{sep-hilbert-program}. In
+line with this movement 1933 Andrei Kolmogorov published
 \textit{Grundbegriffe der Wahrscheinlichkeitsrechnung} which set the
-foundation of modern probability calculus.
+foundation of modern probability calculus where he wrote in the preface:
 
 \begin{quote}
-“The purpose of this monograph is to give an axiomatic foundation for the theory of probability. The author set himself the task of putting in their natural place, among the general notions of modern mathematics, the basic concepts of probability theory—concepts which until recently were considered to be quite peculiar.” \cite{a_n_kolmogorov_foundations_1950}
+“The purpose of this monograph is to give an axiomatic foundation for the theory of probability. The author set himself the task of putting in their natural place, among the general notions of modern mathematics, the basic concepts of probability theory—concepts which until recently were considered to be quite peculiar.” \footnote{The English translation is taken from \cite[p. 15]{a_n_kolmogorov_foundations_1950}.} \cite[p.15]{noauthor_kolmogoroff_nodate}. 
 \end{quote}
 
 Although his axiomatic approach aimed to be, as a mathematical theory,
@@ -291,12 +286,69 @@ A different perspective on probability was offered by the German
 mathematician and philosopher Rudolf Carnap:
 
 \begin{quote}
-"The various theories of probability are attempts at an explication of what is regarded as the prescientific concept of probability. In fact, however, there are two fundamentally different concepts for which the term 'probability' is in general use. The two concepts are as follows, here distinguished by subscripts.
+The various theories of probability are attempts at an explication of what is regarded as the prescientific concept of probability. In fact, however, there are two fundamentally different concepts for which the term ``probability'' is in general use. The two concepts are as follows, here distinguished by subscripts.
 \begin{enumerate}[label=(\arabic*)]
   \item $\text{Probability}_1$ is the degree of confirmation of a hypothesis $h$ with respect to an evidence statement $e$, e.g., an observational report. This is a logical, semantical concept. A sentence about this concept is based, not on observation of facts, but on logical analysis; if it is true, it is L-true (analytic).
   \item $\text{Probability}_2$ is the relative frequency (in the long run) of one property of events or things with respect to another. A sentence about is concept is factual, empirical." \cite{carnap_logical_1950}
 \end{enumerate}
 \end{quote}
+
+The multifaceted nature of probability still makes it hard to formalize
+and unify into a single coherent theory. Probability is expected to
+capture classical probability calculus while also being appropriate for
+modeling existing evidence and, more broadly, information based
+reasoning under uncertainty. In the context of statistical inference,
+probability serves dual roles: as a mathematical framework for modeling
+randomness (frequentist view) and as a measure of belief or uncertainty
+(Bayesian view). These interpretations lead to different methodologies
+and philosophical foundations, making unification challenging.
+Nonetheless, both approaches aim to derive meaningful conclusions from
+data in the presence of uncertainty. A probabilistic representation of
+the truth value of assumptions should align with the real world. If
+inference methods tended to assign high degrees of belief to false
+assumptions and low degrees of belief to true ones, they would be highly
+misleading and systematically deceptive. A requirement for ``meaningful
+conclusions'' must be that the probabilistic representation is
+\textit{calibrated} in the sense that false assumptions are typically
+assigned low degrees of belief, and it is rare for them to receive high
+degrees of belief, and vice versa for true assumptions
+\cite{martin_false_2019}. This requirement aligns well with the
+\textit{Cournot's principle} which was firstly stated by Jacob Bernoulli
+in 1713 and later further developed by Antoine-Augustin Cournot and can
+be seen as an early attempt to bridge probability calculus with the real
+world:
+
+\begin{quote}
+"An event with very small probability is morally impossible; it will not happen. Equivalently, an event with very high probability is morally certain;" \cite{shafer_origins_2018}.
+\end{quote}
+
+It also resonates with the weak repeated sampling principle, as stated
+by Cox and Hinkley
+
+\begin{quote}
+"The weak version of the repeated sampling principle requires that we should not follow procedures which for some possible parameter values would give, in hypothetical repetitions, misleading conclusions most of the time." \cite[p.~45--46]{cox_theoretical_1979}.
+\end{quote}
+
+In this sense, \textit{false confidence} should be avoided. Accordingly,
+the following statement from a paper on the false confidence phenomenon
+in satellite conjunction analysis, where reliable collision risk
+assessment is a serious concern, can only be seen as concerning:
+
+\begin{quote}
+"Every real-world risk analysis problem involves a proposition of interest that is determined by
+the structure of the problem itself; e.g. ‘Will these two satellites collide?’. Just as the practitioner will not seek out propositions strongly affected by false confidence, neither do practitioners have the option of avoiding such propositions when they arise." \cite{balch_satellite_2019}.
+\end{quote}
+
+Inferential models, as a modern framework for ``prior-free posterior
+probabilistic inference'', introduced by Ryan Martin and Chuanhai Liu
+\cite{martin_inferential_2013}, are capable of offering, under certain
+conditions, calibration properties which can constrain false confidence.
+
+In the following, I will explain in more detail what is meant by false
+confidence, how and why it may lead to problems. To motivate this
+discussion, I will introduce key ideas from imprecise probability theory
+and fiducialism, and then explore their connection to inferential
+models.
 
 \begin{center}
 \vspace{1cm}
@@ -338,15 +390,34 @@ mathematician and philosopher Rudolf Carnap:
 
 \subsection{Probability measure}
 
+In this section, I will revisit some essential concepts from probability
+calculus in order to later highlight key differences from the
+established mathematical notion of probability. The underlying structure
+of the measure-theoretic construction of probability is based on
+specific types of set systems that exhibit useful structural properties
+--- so-called \(\sigma\)-algebras. In measure theory, the symbol
+\(\sigma\) typically denotes (at most) countably infinite.
+
 \begin{definition}[Sigma-Algebra]
 Let $\Omega$ be a set and $\mathcal{P}(\Omega)$ denote the power set over $\Omega$. Then $\mathcal{F} \subseteq \mathcal{P}(\Omega)$ is called a $\sigma$-Algebra if 
 \begin{enumerate}
   \item $\emptyset \in  \mathcal{F}$
-  \item $A \in \mathcal{F} \Rightarrow \overline{A} \in \mathcal{F}$
+  \item $A \in \mathcal{F} \Rightarrow A^C \in \mathcal{F}$
   \item $(A_n)_{n \in \mathbb{N}} \subseteq \mathcal{F} \Rightarrow \displaystyle\bigcup_{n \in \mathbb{N}} A_n \in \mathcal{F}$
 \end{enumerate}
 holds. The tupel $(\Omega, \mathcal{F})$ is then called a {measurable space}.
 \end{definition}
+
+Therefore \(\sigma\)-algebras are non-empty collections of sets that
+contain the empty set and are closed under complementation and countable
+unions. Simplified, finite cases can often be seen as special cases of
+countably infinite ones by extending a finite index set
+\(I = \{1, \dots, k \}\) to a countable one by defining
+\(A_i = \emptyset \quad \text{for } i > k\) so that a finite union
+\(\bigcup_{i=1}^{k} A_i\) can be rewritten as a countable union
+\(\bigcup_{i=1}^{\infty} A_i,\) with \(A_i = \emptyset\) for all
+\(i > k\).
+
 \begin{definition}[Measure]
 Let $(\Omega, \mathcal{F})$ be a measurable space. A set-function $\mu : \mathcal{F} \rightarrow \mathbb{R}$ is called a {measure} if it fulfils
 \begin{enumerate}
@@ -355,8 +426,12 @@ Let $(\Omega, \mathcal{F})$ be a measurable space. A set-function $\mu : \mathca
   \item For any sequences of pairwise disjunct sets $A_i \in \mathcal{F}, \, i \geq 1$: \newline
     $\mu \big(\bigcup_{i=1}^{\infty} A_i \big) = \sum_{i=1}^{\infty} \mu(A_i)$ \quad ($\sigma$-additivity)
 \end{enumerate}
-Measures that are normed to $\mu(\Omega) = 1$ (normalization property) are called \textit{probability measure} and will be noted with $\mathbb{P}$. The \textit{measure space} $(\Omega, \mathcal{F}, \mathbb{P})$ is then called a probability space where $\Omega$ is called a \textit{sample space} and $\mathcal{F}$ a \textit{event space}.
+The tupel $(\Omega, \mathcal{F}, \mu)$ is called a \textit{measure space}. Measures that are normed to $\mu(\Omega) = 1$ (normalization property) are called a \textit{probability measure} and will be noted with $\mathbb{P}$. In the context of probability calculus $(\Omega, \mathcal{F}, \mathbb{P})$ is called a probability space, $\Omega$ a \textit{sample space} and $\mathcal{F}$ an \textit{event space}.
 \end{definition}
+
+Among the unfortunate terminological choices in statistics, random
+variable is perhaps one of the most misleading since they are neither
+random, nor variables by nature.
 
 \begin{definition}[Random variable]
 Let $(\Omega, \mathcal{F}, \mathbb{P})$ be a probability space and $(\Omega', \mathcal{F}')$ a measurable space. A function $X: \Omega \rightarrow \Omega'$ is a \textit{random variable} if 
@@ -447,12 +522,12 @@ probability is around 20\%'', this result might be more or less
 troubling. It is thinkable that a very experienced policeman had
 encountered many sufficiently similar situations to determine a relative
 frequency based solely on the information he gathered from interrogating
-\(A\), without any knowledge of \$B. Based on such a reading, the above
-conclusion seems quite reasonable - even though such a perspective might
-be rather uncommon in this context. Rather, one would interpret such an
-educated guess as a quantification of the strength of belief. Such an
-educated guess would more likely be meant as a quantification of the
-strength of belief.
+\(A\), without any knowledge of \(B\). Based on such a reading, the
+above conclusion seems quite reasonable - even though such a perspective
+might be rather uncommon in this context. Rather, one would interpret
+such an educated guess as a quantification of the strength of belief.
+Such an educated guess would more likely be meant as a quantification of
+the strength of belief.
 
 \subsection{Random sets}
 
@@ -524,7 +599,7 @@ This framework enables us to model the initial situation in two particular cases
 
 The first case reveals a notable difference from the Bayesian flat prior approach. Instead of assuming a prior guilt (or innocence) of 0.5 for each suspect under ignorance, we can now adopt a more sophisticated perspective. The belief base contains our information that exactly one of the two suspects is guilty. $N(A \text{ is guilty} \, \lor \, B \text{ is guilty}) = 1$. On the other hand there is no reason to believe in the guilt of $A$ or $B$ separately $N(A \text{ is guilty}) = N(B \text{ is guilty}) = 0$. On the other hand there is no reason to doubt that one of the subjects is innocent $\Pi(A \text{ is guilty} \, \lor \, B \textit{ is guilty}) = \Pi (A \text{ is guilty}) = \Pi (B \text{ is guilty}) = 1$. 
 
-In the second case e.g. for $N(A \text{ is guilty}) = 1$ it directly follows through $\Pi(A) \text{ is not guilty}) = 1 -  N(A \text{ is guilty}) = 0$ and $A \text{ is guilty} \Leftrightarrow B \text{ is not guilty}$ that $B$ must be believed to be innocent. The situation where an agent has incomplete knowledge between complete ignorance and complete knowledge can not be modelled so far.
+In the second case e.g. for $N(A \text{ is guilty}) = 1$ it directly follows through $\Pi(A) \text{ is not guilty}) = 1 -  N(A \text{ is guilty}) = 0$ and $A \text{ is guilty} \Leftrightarrow B \text{ is not guilty}$ that $B$ must be believed to be innocent. The situation where an agent has incomplete knowledge inbetween complete ignorance and complete knowledge can not be modelled so far.
 \end{example}
 
 A thought experiment suggests, without claiming to present a fully
@@ -533,25 +608,65 @@ familiar measure theory. Imagine a hypothetical universe consisting of
 many different worlds. Each world corresponds to a logical state and
 must be free of logical contradictions. By asking a question ``How
 probable is \(p\)?'' can thereby be understood as a question of ``How
-probable is it to exist in a world where \(p\) is true?''. Probabilistic
-reasoning then follows roughly the following scheme. We must first
-consider which worlds qualify, so that only those sufficiently similar
-to our own are taken into account. This is very similar to narrowing
-down the population in statistical studies or considering theoretical
-assumptions and experimental conditions in physics. Then we narrow down
-the logical variables of interest. Only looking at these variables some
-worlds are indistinguishable and can be organized into sets \(\omega\)
-representing such worlds with indistinguishable states. Let \(\Omega\)
-denote the set that contains the resulting categories \(\omega\) and
-\([p] \subseteq \Omega\) describe the conditions where \(p\) is true. We
-then refer to the conditions \([p]\) as the models of \(p\). A
-proposition \(p\) is believed to be true if \([K] \subseteq [p]\) and
-believed to be false if \([K] \subseteq [p]^C\). If a proposition allows
-for at least one setting where it could be true it is considered to be
-\textit{possible}. If a proposition is true in every setting it is
-\textit{necessary} to believe in it.
+probable is it to exist in a world where \(p\) is true?''. Such
+probabilistic reasoning then follows roughly the following scheme. We
+must first consider which type of worlds qualify, so that only those
+sufficiently similar to our own are taken into account. This is very
+similar to narrowing down the population in statistical studies or
+considering theoretical assumptions and experimental conditions in
+physics. Then we narrow down the logical variables of interest. Only
+looking at these variables some worlds are indistinguishable and can be
+organized into sets \(\omega\) representing such worlds with
+indistinguishable states. Let \(\Omega\) denote the set that contains
+the resulting categories \(\omega\) and \([p] \subseteq \Omega\)
+describe the conditions where \(p\) is true. We then refer to the
+conditions \([p]\) as the models of \(p\). A proposition \(p\) is
+believed to be true if \([K] \subseteq [p]\) and believed to be false if
+\([K] \subseteq [p]^C\). If a proposition allows for at least one
+setting where it could be true it is considered to be \textit{possible}.
+If a proposition is true in every setting it is \textit{necessary} to
+believe in it.
 
-\(\Pi([p]) \cap necessary\)
+\subsubsection{Fuzzy set theory}
+
+The link to set-theoretic measure theory permits the incorporation of
+fuzzy set theory.
+
+\begin{definition}[Fuzzy set, membership function]
+Let $X$ be a set. A \textit{fuzzy set} $\tilde{A}$ in $X$ is a collection of ordered pairs of the form
+$$\tilde{A} = \big\{ (x, \mu_{\tilde{A}}(x)) \, | \, x \in X \big\}.$$
+$\mu_{\tilde{A}}: X \rightarrow L, \sup(L) < \infty$ is called the membership function (or generalized characteristic function). For $\mu_{\tilde{A}} (x) = 1$ the fuzzy set is \textit{normalized}. For $L = [0,1]$ is then called a \text{possibility scale}.
+\end{definition}
+
+\begin{definition}[$\alpha$-cut]
+The set of elements that belong to $\tilde{A}$ at least to the degree $\alpha$ is called a $\alpha$-\textit{cut}:
+$$A_{\alpha} = \big\{ x \, | \, x \in X, \, \mu_{\tilde{A}} \geq \alpha \big\}$$
+and $A_{\alpha}' = \big\{ x \, | \, x \in X, \, \mu_{\tilde{A}} > \alpha \big\}$ defines a \textit{strong} $\alpha$-\textit{cut}. 
+\end{definition}
+
+Here are a few useful basic operations on fuzzy sets
+\(\tilde{A}, \, \tilde{B}\):
+
+\begin{itemize}
+  \item Intersection (corresponding to a logical and): $\mu_{\tilde{A} \cap \tilde{B}} := \min \big( \mu_{\tilde{A}} (X), \, \mu_{\tilde{B}} \big) \ \forall x \in X$
+  \item Union (corresponding to an exclusive\footnote{An inclusive or in $A \lor B$ describes a relation where A, B or A and B together are true. An exclusive or in $A \dot\lor B$ describes a relation where only A or B can be true, but not A and B together.} or): $\mu_{\tilde{A} \cup \tilde{B}} := \max \big( \mu_{\tilde{A}} (X), \, \mu_{\tilde{B}} \big) \ \forall x \in X$ 
+  \item Complement (corresponding to a negation): $\mu_{\tilde{A}} (X) := 1 - \mu_{\tilde{A}} (X) \ \forall x \in X$
+\end{itemize}
+
+\subsubsection{Numeric possibility theory}
+
+The key idea behind numeric possibility theory is that the current state
+of an agents incomplete knowledge can be captured by a
+\textit{possibility distribution} and thus can be seen as an extension
+of boolean possibility theory.
+
+\(\pi: \mathcal{X} \rightarrow [0, 1]\) and the consistency assumption,
+that \(\pi (x) = 1\) is fulfilled for at least one \(x \in X\).
+\(1 - \pi (x)\) might be interpreted as an agents surprise that \(X\)
+turns out to be \(x\). A possibility distribution could be e.g.~derived
+by intuition, an experts opinion or a known distribution. A
+\textit{possibility measure} is defined as a set function that maps from
+\(\mathcal{P} (\mathcal{X})\) to \([0,1]\)
 
 Possibility contour \(\pi: \mathcal{X} \rightarrow [0, \, 1]\) with
 \(\sup_x \pi (x) = 1\) Possibility measure
@@ -643,7 +758,7 @@ feasible.
 Ryan Martin defines defines inferential models as follows:
 
 \begin{definition}[Inferential models, as given by \cite{martin_false_2019}]
-An inferential model is a map from $(\mathscr{P}, y, \dots)$ to a function 
+Fix the sample space $\mathbb{Y}$, parameter space $\Theta$ and let $\mathscr{P} = \{P_{Y|\theta} : \theta \in \Theta\}$ be a statistical model. An inferential model is a map from $(\mathscr{P}, y, \dots)$ to a function 
 $b_y : 2^{\Theta} \to [0,1]$, where $b_y(A)$ represents the analyst's belief 
 in the assertion "$\theta \in A$".
 \end{definition}
