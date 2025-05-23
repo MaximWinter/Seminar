@@ -453,11 +453,18 @@ $b_y : 2^{\Theta}$\footnote{\text{This is an alternative representation of the p
 in the assertion "$\theta \in A$".
 \end{definition}
 
-This definition seems to have been purposefully left vague and requires further explanation. It formalizes how an assumed model $\mathscr{P}$ and the input data leads to an analysts degree of belief about $\theta$. In the case of Bayesian inference the input would be $(\mathscr{P}, y, prior)$ and the output $b_y$ would be the posterior distribution for $\theta$ and therefore an (additive) probability measure. 
+This definition seems to have been purposefully left vague and requires further explanation. It formalizes how an assumed model $\mathscr{P}$ and the input data leads to an analysts degree of belief about $\theta$. In the case of Bayesian inference the input would be $(\mathscr{P}, y, prior)$ and the output $b_y$ would be the posterior distribution for $\theta$ and therefore an (additive) probability measure. But the IM framework offers more flexibility by allowing "$(\dots)$" to be something else, e.g. a random set, a DGE, and $b_y$ is not required to be additive. The authors suggestions on proper use of this additional flexibility focus on avoiding false confidence by introducing criteria and descriptions how these can be fulfilled. A formalization of false confidence is given by the false confidence theorem.
 
-\begin{theorem}[False Confidence] Consider probability measure $\mathbb{P}_y$ with a density function that is bounded and continous for each y. Then for any $\theta \in \Theta$, any $\alpha \in (0,1)$, and any $p \in (0,1)$, there exists a set $A \subset \Theta$ such that
+\begin{theorem}[False Confidence] Consider probability measure $\mathbb{P}_y$ with a density function that is bounded and continuous for each y. Then for any $\theta \in \Theta$, any $\alpha \in (0,1)$, and any $p \in (0,1)$, there exists a set $A \subset \Theta$ such that
 $$\theta \notin A  \ \text{ and } \ P_{Y| \theta} \{\mathbb{P}_y (A) \geq 1 - \alpha \} \geq p.$$
 \end{theorem}
+
+In this sense the \textit{false confidence theorem} states that by definition, since additive belief functions are probability measures, all additive inferential models contain assertions that lead to false confidence. Such statements do not automatically cause complications. For example, when they are trivial, such as when the probability measure is based on the Lebesgue measure and therefore any assertion, or integration area, $\theta \in A \subseteq \mathbb{Q}$ must be $\mathbb{P}(A) = 0$ and $\mathbb{P}(A^C) = 1$ by construction since $A$ is a Lebesgue-null set. Such trivial cases can be easily avoided, since it is known that relatively small subsets of $\Theta$ are tend to get assigned a small probability, and therefore the complement a large one. That are simply consequences of applying probability calculus. In a frequentist setting the consequences of applying probability calculus typically can be easily understood and will not lead to problems\footnote{Example~\ref{ex:prisoners1} can be read in this way.}, since they are typically explicitly intended. Problems may arise if small integration areas cannot be avoided and frequentist inference is not feasible — this was identified by Balch et al. as the reason for the aforementioned issue in satellite conjunction analysis, where the underlying phenomenon is known as probability dilution. Furthermore, they say:
+\begin{quote}
+"False confidence is the inevitable result of treating epistemic uncertainty as though it were aleatory variability."\cite{balch_satellite_2019}.
+\end{quote}
+
+
 
 \begin{definition}[Validity]\label{def:validity}
 An inferential model $( \mathscr{P},y, \dots) \mapsto b_y$ is \textit{valid} if
@@ -465,10 +472,7 @@ $$\sup_{\theta \notin A} P_{Y|\theta} \{b_y (A) > 1- \alpha \} \leq \alpha , \qu
 That is, if $\theta \notin A$ and, hence, the hypothesis $A$ is false, then the degree of belief, $b_y$ (A), which is a random variable as a function of $Y \sim P_{Y|\theta}$, is stochastically no larger than $Unif(0,1)$.
 \end{definition}
 
-In this sense the \textit{false confidence theorem} states that by definition, since additive belief functions are probability measures, all additive inferential models contain assertions that lead to false confidence. Such statements do not automatically cause practical complications. For example, when they are trivial, such as when the probability measure is based on the Lebesgue measure and therefore any assertion, or integration area, $\theta \in A \subseteq \mathbb{Q}$ must be $\mathbb{P}(A) = 0$ and $\mathbb{P}(A^C) = 1$ by construction since $A$ is a Lebesgue-null set. Such trivial cases can be easily avoided, since it is known that relatively small subsets of $\Theta$ are tend to get assigned a small probability, and therefore the complement a large one. That are simply consequences of applying probability calculus. In a frequentist setting the consequences of applying probability calculus typically can be easily understood and will not lead to problems\footnote{Example~\ref{ex:prisoners1} can be read in this way.}, since they are typically explicitly intended. Problems may arise if small integration areas cannot be avoided and frequentist inference is not feasible — this was identified by Balch et al. as the reason for the aforementioned issue in satellite conjunction analysis, where the underlying phenomenon is known as probability dilution. Furthermore, they write:
-\begin{quote}
-"False confidence is the inevitable result of treating epistemic uncertainty as though it were aleatory variability."\cite{balch_satellite_2019}.
-\end{quote}
+
 
 
 \begin{theorem}
@@ -503,9 +507,8 @@ If we are e.g. interested in the assertion $A = \{\mu \, | \, \mu > 0\}$ and obs
 \end{example}
 
 In the early stage of IM the focus laid on the \textit{hitting probability} of random sets defined as $\gamma(U^*) = P(U^* \in S(\Gamma))$. If $\gamma(U_0) \geq_{st}$\footnote{$\geq_{st}$ means "stochastically no smaller than" in the sense that the distribution function of $\gamma (U_0)$ is on or below that of $Unif(0,1)$.} $Unif(0,1)$, as a function of $U_0 \sim P_{U_0}$, holds, then the IM output is said to be valid, as stated by proposition 16.1 in \cite{berger_handbook_2024}.
-
-
-
+This can be reformulated to the requirement that $S$ must be such that $P_U \{\gamma_S \leq \alpha \} \leq \alpha \quad \forall \alpha \in [0, \, 1]$. In the validity theorem we can replace $b_y$, which is a pessimistic belief representation, though an optimistic belief representation $p_y$. Then $$\sup_{\theta \in A} P_{Y | \theta} \{p_Y (A) \leq \alpha \} \, \leq \, \alpha \quad \forall \alpha \in [0, \, 1], \, \forall \, A \subseteq \Theta$$ 
+shows the connection between an optimistic belief that is limited by $\alpha$. This relation can be captured by a possibility distribution $\pi$ by choosing the possibility measure $\Pi(A) := \sup_{u \in A} \pi (u)$ as the optimistic belief representation. Then the validity of an IM output does not rely on a random set, but on the chosen possibility distribution. This simplifies valid IM construction from "construct a random set which offers our desired properties to cover the uncertainty about $U$" to a much simpler problem, where the uncertainty can be directly covered by a possibility distribution. Every suitable possibility distribution directly leads to validity. A possibility distribution is suitable if for every assertion $A$ and for every $\alpha$, the resulting $\alpha$-cuts $A_\alpha$ must cover at least as many possibilities as there is uncertainty.
 
 
 
