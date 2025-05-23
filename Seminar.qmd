@@ -178,7 +178,7 @@ Consider a dice that is numbered and has coloured faces like this: $\Omega = \Bi
 \raisebox{-3pt}{\drawdie[line hidden/.append style={fill=green, opacity=0.6}]{6}}
 \Big\}$.
 
-If we are interested in the face values we can simply map the face values to the according numbers $X: \Omega \rightarrow \{1, 2, 3, 4, 5, 6\}$. For each realization of $X$ we can exactly know which events did occur or not. If we instead map to colours by $Y: \Omega \rightarrow \{blue, white, green\}$ some information is lost. If e.g. a green face was rolled, we can not know which of the green sides $\Big\{
+If we are interested in the face values we can simply map the faces to the according numbers $X: \Omega \rightarrow \{1, 2, 3, 4, 5, 6\}$. For each realization of $X$ we can exactly know which events did occur or not. If we instead map to colours by $Y: \Omega \rightarrow \{blue, white, green\}$ some information is lost. If e.g. a green face was rolled, we can not know which of the green sides $\Big\{
 \raisebox{-3pt}{\drawdie[line hidden/.append style={fill=green, opacity=0.6}]{4}},
 \raisebox{-3pt}{\drawdie[line hidden/.append style={fill=green, opacity=0.6}]{5}},
 \raisebox{-3pt}{\drawdie[line hidden/.append style={fill=green, opacity=0.6}]{6}}
@@ -191,7 +191,7 @@ If we are interested in the face values we can simply map the face values to the
 
 The term \textit{imprecise probability} does not refer to a particular theory, but rather to a collection of different approaches that share a common feature of imprecision. In contrast to probability measures, imprecise probabilities are generally not additive. Some approaches can be seen as a extension of the measure theoretic based probability theory, like \textit{random sets}, while others might have a non-measure-theoretic foundation. In this chapter I will give deliver some motivation for imprecise probabilities in general and introduce some popular concepts of imprecise probabilities.
 
-\begin{example}[Prisoners dilemma I]
+\begin{example}[Prisoners dilemma I]\label{ex:prisoners1}
 Consider a variation of the prison dilemma used in game theory, but from our perspective as a policeman. Assume there a two suspects of a crime, person $A$ and $B$, where it is known, that exactly one of them must be guilty. If $A$ is guilty $B$ can not be guilty and otherwise. We, as a policeman, interrogate $A$ without knowing anything about person $B$. After the interrogation a college asks about our opinion, how probable it is, that person $A$ is guilty.
 
 \begin{quote}
@@ -241,7 +241,6 @@ The first case reveals a notable difference from a Bayesian flat prior approach.
 
 In the second case e.g. for $N(A \text{ is guilty}) = 1$ it directly follows through $\Pi(A) \text{ is not guilty}) = 1 -  N(A \text{ is guilty}) = 0$ and $A \text{ is guilty} \Leftrightarrow B \text{ is not guilty}$ that $B$ must be believed to be innocent. The situation where an agent has incomplete knowledge between \textit{complete ignorance} and \textit{complete knowledge} can not be modelled so far.
 \end{example}
-
 
 
 A thought experiment suggests, without claiming to present a fully developed theory, how we can bridge this logical concept to the more familiar measure theory. Imagine a hypothetical universe consisting of many different worlds. Each world corresponds to a logical state and must be free of logical contradictions. By asking a question "How probable is $p$?" can thereby be understood as a question of "How probable is it to exist in a world where $p$ is true?". Such probabilistic reasoning then follows roughly the following scheme. We must first consider which type of worlds qualify, so that only those sufficiently similar to our own are taken into account. This is very similar to narrowing down the population in statistical studies or considering theoretical assumptions and experimental conditions in physics. Then we narrow down the logical variables of interest. Only looking at these variables some worlds are indistinguishable and can be organized into sets $\omega$ representing such worlds with indistinguishable states. Let $\Omega$ denote the set that contains the resulting categories $\omega$ and $[p] \subseteq \Omega$ describe the conditions where $p$ is true. We then refer to the conditions $[p]$ as the models of $p$. A proposition $p$ is believed to be true if $[K] \subseteq [p]$ and believed to be false if $[K] \subseteq [p]^C$. If a proposition allows for at least one setting where it could be true it is considered to be \textit{possible}. If a proposition is true in every setting it is \textit{necessary} to believe in it. 
@@ -415,7 +414,7 @@ Therefore by looking up the related e.g. 0.95-quantile to an observed sample cor
 \subsection{Generalized Fiducial Inference}
 
 \begin{definition}[Data generating equation]
-A data generating equation (DGE) has the form $\mathbb{X} \ = \  G \, (\theta, \, U)$ and contains
+A data generating equation (DGE)\footnote{In reference to \cite[Chapters 6.4.1.2 and 13.1]{berger_handbook_2024}], with modified notation to maintain consistency in this exposition. Furthermore some simplifications were made to focus on the essential aspects.} has the form $\mathbb{X} \ = \  G \, (\theta, \, U)$ and contains
 \begin{itemize}
   \item observable data $\mathbb{X}$
   \item an association function $G$
@@ -441,7 +440,7 @@ If the exact value of $U^* = -0.841$ was known, the true value of $\theta$ could
 $$\theta = X- U^* = 1.159 - (-0.841) = 2$$
 \end{example}
 
-So can we simply observe $X$ and solve for $\theta \ = \ G^{-1}(X, U^*)$? The required information about $U^*$ is typically not available and therefore the direct approach is not feasible. But since the distribution of $U \sim P_{U}$ is known a copy of $U$, denoted as $u^* \sim P_U$, can be be repeatedly drawn. The new relation $X = G(\theta^*, u^*)$ contains observed (therefore known) data, simulated (therefore known) sample of $u*$ and a known relation $G$. Therefore $\theta^*$ can be derived as a \textit{random estimator} (or \textit{fiducial sample}) with an according fiducial distribution.
+So can we simply observe $X$ and solve for $\theta \ = \ G^{-1}(X, U^*)$? The required information about $U^*$ is typically not available and therefore the direct approach is not feasible. But since the distribution of $U \sim P_{U}$ is known a copy of $U$, denoted as $u^* \sim P_U$, can be be repeatedly drawn. The new relation $X = G(\theta^*, u^*)$ contains observed (therefore known) data, simulated (therefore known) sample of $u^*$ and a known relation $G$. Therefore $\theta^*$ can be derived as a \textit{random estimator} (or \textit{fiducial sample}) with an according fiducial distribution. This process is called a \textit{stoachastic inversion process} and leads to an estimate, that looks familiar to an MLE, but instead of minimizing the distance between an assumed parametric model and data generating process, the distance between a DGE and the data gets minimized. 
 $$\theta^*_{FD} \ = \ \text{argmin}_{\theta^*} \| \hspace{-0.3cm} \underbrace{X}_{\displaystyle{G(\theta, \, U^*)}} \! - \ G(\theta, u^*) \| $$
 
 \section{Inferential models}
@@ -450,13 +449,35 @@ Ryan Martin defines defines inferential models as follows:
 
 \begin{definition}[Inferential models, as given by \cite{martin_false_2019}]
 Fix the sample space $\mathbb{Y}$, parameter space $\Theta$ and let $\mathscr{P} = \{P_{Y|\theta} : \theta \in \Theta\}$ be a statistical model. An inferential model is a map from $(\mathscr{P}, y, \dots)$ to a function 
-$b_y : 2^{\Theta} \to [0,1]$, where $b_y(A)$ represents the analyst's belief 
+$b_y : 2^{\Theta}$\footnote{\text{This is an alternative representation of the powerset over} $\Theta$.} $\to [0,1]$, where $b_y(A)$ represents the analyst's belief 
 in the assertion "$\theta \in A$".
 \end{definition}
 
-This definition seems to have been purposefully left vague and requires further explanation.
+This definition seems to have been purposefully left vague and requires further explanation. It formalizes how an assumed model $\mathscr{P}$ and the input data leads to an analysts degree of belief about $\theta$. In the case of Bayesian inference the input would be $(\mathscr{P}, y, prior)$ and the output $b_y$ would be the posterior distribution for $\theta$ and therefore an (additive) probability measure. 
 
-\subsection{Inferential models based on random sets}
+\begin{theorem}[False Confidence] Consider probability measure $\mathbb{P}_y$ with a density function that is bounded and continous for each y. Then for any $\theta \in \Theta$, any $\alpha \in (0,1)$, and any $p \in (0,1)$, there exists a set $A \subset \Theta$ such that
+$$\theta \notin A  \ \text{ and } \ P_{Y| \theta} \{\mathbb{P}_y (A) \geq 1 - \alpha \} \geq p.$$
+\end{theorem}
+
+\begin{definition}[Validity]\label{def:validity}
+An inferential model $( \mathscr{P},y, \dots) \mapsto b_y$ is \textit{valid} if
+$$\sup_{\theta \notin A} P_{Y|\theta} \{b_y (A) > 1- \alpha \} \leq \alpha , \quad \forall \alpha \in [0, 1], \quad \forall A \subset \Theta .$$
+That is, if $\theta \notin A$ and, hence, the hypothesis $A$ is false, then the degree of belief, $b_y$ (A), which is a random variable as a function of $Y \sim P_{Y|\theta}$, is stochastically no larger than $Unif(0,1)$.
+\end{definition}
+
+In this sense the \textit{false confidence theorem} states that by definition, since additive belief functions are probability measures, all additive inferential models contain assertions that lead to false confidence. Such statements do not automatically cause practical complications. For example, when they are trivial, such as when the probability measure is based on the Lebesgue measure and therefore any assertion, or integration area, $\theta \in A \subseteq \mathbb{Q}$ must be $\mathbb{P}(A) = 0$ and $\mathbb{P}(A^C) = 1$ by construction since $A$ is a Lebesgue-null set. Such trivial cases can be easily avoided, since it is known that relatively small subsets of $\Theta$ are tend to get assigned a small probability, and therefore the complement a large one. That are simply consequences of applying probability calculus. In a frequentist setting the consequences of applying probability calculus typically can be easily understood and will not lead to problems\footnote{Example~\ref{ex:prisoners1} can be read in this way.}, since they are explicitly intended. Problems may arise if small integration areas cannot be avoided and frequentist inference is not feasible — this was identified by Balch et al. as the reason for the aforementioned issue in satellite conjunction analysis, where the underlying phenomenon is known as probability dilution. Furthermore, they write:
+\begin{quote}
+"False confidence is the inevitable result of treating epistemic uncertainty as though it were aleatory variability."\cite{balch_satellite_2019}.
+\end{quote}
+
+\begin{theorem}
+Let $(\mathscr{P}, y, \dots) \mapsto b_y$ be an inferential model that satisfies the validity condition (Definition~\ref{def:validity}). Fix $\alpha \in (0,1)$.
+
+(a) Consider a testing problem with $H_0 : \theta \in A$ versus $H_1 : \theta \notin A$, where $A$ is any subset of $\Theta$. Then the test, $T_y$, that rejects $H_0$ if and only if $p_y(A) \leq \alpha$ has frequentist Type I error probability upper-bounded by $\alpha$. That is,
+$$\sup_{\theta \in A} P_{Y|\theta} (T_y \text{ rejects } H_0) \leq \alpha .$$
+\end{theorem}
+
+\subsection{Construction of valid Inferential models}
 
 In the early stage of Inferential models the authors focused on IM construction based on random sets suggested by the following procedure: 
 
@@ -466,5 +487,24 @@ In the early stage of Inferential models the authors focused on IM construction 
 \textit{C-step. } Combine $X = x, \, \Theta_x (u)$, and $\mathcal{S}$ to obtain a random set $\Theta_x (\mathcal{S}) = \bigcup_{u \in {\mathcal{S}}} \Theta_x(u)$. Then, for any assertion $A \subseteq \Theta$, compute the probability that the random set $\Theta_x (\mathcal{S})$ is a subset of $A$ as a measure of the available evidence in supporting $A$"\cite{martin_inferential_2013}.
 \end{quote}
 
-The \textit{a(ssociation)-step} is basically the same as the stating a data generating equation. The \textit{p(rediction)-step} is conceptionally the same as the simulating samples from a copy of the unobserved auxiliary random variable but with the major difference, that an extra layer of impression is added by the usage of a random set. In contrast to the GFI method, not simply just a single single random estimate and a single fiducial distribution are derived, but instead a set of random estimates and fiducial distributions. While GFI relies on a arbitrary choice of one single auxiliary variable $U$, which might be or not be close to the true (or optimal) $U_0$, a good choice of of the random set $\Gamma$ makes it more probable that $U_0$ is captured in $S(\Gamma)$ which then makes it more probable, that the true (or optimal) value for $\theta$ is also captured. In particular, from $U_0 \in S(\Gamma)$, it follows that $\theta_0 \in \{ \theta \mid X = G(U, \theta) \} := \Theta_x(U)$ and otherwise.
+The \textit{a(ssociation)-step} is basically the same as the stating a data generating equation. The \textit{p(rediction)-step} is conceptionally the same as simulating samples from copies of the unobserved auxiliary random variable $U$ but with the major difference, that an extra layer of impression is added by the usage of a random set, characterized by as a subset of an \textit{auxiliary space} $S(U) \subseteq \mathbb{U}$, the so-called \textit{predictive random set}. In contrast to the GFI method, not simply just a single single random estimate and a single fiducial distribution are derived, but instead a set of random estimates and fiducial distributions, with one exception\footnote{The GFI method with an auxiliary variable $U$ can be seen as a special case of such an additive IM where the random set $\Gamma$ can be characterized by $S( \Gamma) = \{U \}$.}. While GFI relies on a arbitrary choice of one single auxiliary variable $U$, which might be or not be close to the true (or optimal) $U_0$, a good choice of of the random set $\Gamma$ makes it more probable that $U_0$ is captured in $S(\Gamma)$ which then makes it more probable, that the true (or optimal) value for $\theta$ is also captured. In particular, from $U_0 \in S(\Gamma)$, it follows that $\theta_0 \in \{ \theta \mid X = G(U, \theta) \} := \Theta_x(U)$ and otherwise.
 The idea behind the \textit{c(ombination)-step} is pretty simple. It suggests to construct, based on the results from the p-step, a new random set. Based on this random set the lower probability can be calculated to evaluate as an non-additive degrees of belief about any assertion of the form $A \subseteq \Theta$.
+
+\begin{example}[Based on example 2.1 in \cite{ermini_leaf_inference_2012}]
+Suppose data $X$ was sampled from $Y \sim \mathcal{N}(\mu, \, 1)$.
+\begin{itemize}
+  \item a-step: Set $X = \mu + U, \quad U \sim \mathcal{N}(0, \, 1)$.
+  \item p-step: Set the predictive random set through $S(u^*) = \{u' \, | \, |u'| \leq |u^*| \}$, where $u^*$ is a copy of $U$ and $u' \in \mathbb{U}$.
+  \item c-step: Combine the results through $\Theta_X (\mathcal{S}) = \bigcup_{u' \in S(u*)} \{ \mu | X = \mu + u' \} = [x - |u^*|, \, x + |u^*|]$. 
+\end{itemize}
+
+If we are e.g. interested in the assertion $A = \{\mu \, | \, \mu > 0\}$ and observe $X = -1$, then $\Theta_{-1} (\mathcal{S}) = [-1 - |u^* |, \, -1 + |u^*|]$ is not a subset of $A$ and the lower probability $\underline{P}(A)$ must be 0. The intersect is the set where $|u^*|$ is larger than 1 and $u^* \sim \mathcal{N}(0, \, 1)$ allows us to calculate the upper probability  $\overline{P}(A) = \mathbb{P}(|\mu^*| > 1) = 2 \cdot (1 - \phi(1)) \approx 0.32$. For the negation $A^C$ the lower probability can be calculated by $\underline{P} (A^C) = 1 - \overline{P}(A) = 0.68$ and the upper probability by $\overline{P} (A^C) = 1 - \underline{P}(A) = 1$.
+\end{example}
+
+In the early stage of IM the focus laid on the \textit{hitting probability} of random sets defined as $\gamma(U^*) = P(U^* \in S(\Gamma))$. If $\gamma(U_0) \geq_{st}$\footnote{$\geq_{st}$ means "stochastically no smaller than" in the sense that the distribution function of $\gamma (U_0)$ is on or below that of $Unif(0,1)$.} $Unif(0,1)$, as a function of $U_0 \sim P_{U_0}$, holds, then the IM output is said to be valid, as stated by proposition 16.1 in \cite{berger_handbook_2024}.
+
+
+
+
+
+
